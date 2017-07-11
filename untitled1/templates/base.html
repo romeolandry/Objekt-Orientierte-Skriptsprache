@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <title>
+        {% block titlte %}
+
+        {% endblock %}
+    </title>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+        <h1>{{ page_title }} </h1>
+
+        {% bootstrap_messages %}
+
+
+         {% if messages %}
+             <div class="row">
+                <div class="col-xs-12">
+                    {% for message in messages %}
+                        <p {% if message.tags %} class="{{ message.tags }}"{% endif %}></p>
+                    {% endfor %}
+                </div>
+
+             </div>
+        {% endif %}
+        {% block content %}
+            Dummy Content
+        {% endblock %}
+
+</body>
+</html>

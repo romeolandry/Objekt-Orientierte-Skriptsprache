@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block content %}
+    <a href = "{% url 'addStudent' %}" class = "btn btn-primary"> fuegen sie Student Hinzu </a>
+    <br/>
+
+    <br/>
+    <table class="table table-striped table-bordered table-hover"  >
+        <tr>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>Email</th>
+            <th>Einschreiben</th>
+            <th>Aendern</th>
+            <th>Loeschern</th>
+        </tr>
+        {% for studen in studirendens %}
+            <tr>
+                <td>
+                    {{ studen.vorname }}
+                </td>
+                <td>
+                    {{ studen.nachname }}
+                </td>
+                <td>
+                    {{ studen.email }}
+                </td>
+            <td><a href="{% url 'st_einschreibung' pk=studen.id %}">{% bootstrap_icon 'pencil' %}</a></td>
+            <td><a href="{% url 'editStudent' pk=studen.id %}">{% bootstrap_icon 'edit' %}</a></td>
+            <td><a href="{% url 'deleteStudent' pk=studen.id %}">{% bootstrap_icon 'trash' %}</a></td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

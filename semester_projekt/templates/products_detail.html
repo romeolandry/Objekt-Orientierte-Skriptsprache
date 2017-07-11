@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block content %}
+{#    <div class = 'row'>#}
+{#        <div class='col-sm-6 col-sm-offset-3'>#}
+{#            <h1> {{ product.name }}</h1>#}
+{#            {% if form %}#}
+{#                     <form action ="" enctype = "multipart/form-data" method = "POST" class= "form-row" >#}
+{#                        {% csrf_token %}#}
+{#                        {{ form|crispy }}#}
+{##}
+{#                        <a href="{% url 'home'%}">{% bootstrap_icon 'plus' %} </a><br/>#}
+{#                 </form>#}
+{#            {% endif %}#}
+{##}
+{#        </div>#}
+{##}
+{#    </div>#}
+
+
+    <div class="row" >
+         <div class='col-sm-4 '>
+                <h5> DESCRIPTION</h5>
+                <div class="panel-footer">{{ product.name }}</div>
+                 <div class="panel-body">{{ product.description }}</div>
+                 <div class="panel-footer">{{ product.name }}</div>
+                 {{ product.description|linebreaks }}
+            {% if recommended_products %}
+                <div class="recommendations">
+                    <h3>People who bought this also bought</h3>
+                    {% for p in recommended_products %}
+                    <div class="item">
+                        <a href="{{ p.get_absolute_url }}">
+                            <img src="{% if p.image %}{{ p.image.url }}{% else %}{% static "img/no_image.png.url" %}{% endif %}">
+                        </a>
+                        <p><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class='col-sm-4'>
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "static/img/image.png.url" %}{% endif %}"/>
+            <h1>{{ product.name }}</h1>
+            <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+            <p class="price"><h4>{{ product.price }}Euro</h4></p>
+        </div>
+
+        <div class='col-sm-4'>
+            <form action="{% if not request.user.is_authenticated %}{% url 'account_login' %}{% else %}{% url "cart_add" product.id %}{% endif %}" method="post">
+                {{ form }}
+                {% csrf_token %}
+                <br/><br/><br/><button type="submit" value = " Submit form" class = "btn btn-primary"> Add to the Cart</button><br/><br/><br/>
+                <a class="btn btn-primary" href="{% url 'home'%}">return </a><br/>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

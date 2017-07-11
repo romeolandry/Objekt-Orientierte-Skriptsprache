@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+    <style>
+    .jumbotron{
+        text-align: center;
+    }
+    </style>
+{% endblock %}
+
+{% block jumbotron %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+{% endblock %}
+
+{% block content %}
+{% for c in categories %}
+    <div class="container">
+      {% if c.products.all %}<h1>{{ c.name }}</h1>{% endif %}
+        <div class="row">
+            {% for product in c.products.all %}
+{#                {% if c.name == product.products %}#}
+                     <div class="col-sm-4">
+
+                         <div class="panel panel-primary">
+                             <a href="{{ product.get_absolute_url }}">
+                                 <div class="panel-body"><img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "static/img/image.png.url" %}{% endif %}" class="img-responsive" style="width:100%" alt="Image"></div>
+                                 <div class="panel-footer">{{ product.name }}</div>
+                             </a>
+                         </div>
+                     </div>
+{#                {% endif %}#}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+    <br><br>
+{% endblock %}
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

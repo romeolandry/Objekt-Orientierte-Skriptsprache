@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block content %}
+    <br/>
+    <form action ="" enctype = "multipart/form-data" method = "POST" class= "form-row" >
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <a href="{% url 'addStudent'%}">{% bootstrap_icon 'plus' %} neue! Registrieren Sie bitte</a><br/>
+        <br/><button type="submit" class = "btn btn-primary"> Submit</button>
+    </form>
+{% endblock %}

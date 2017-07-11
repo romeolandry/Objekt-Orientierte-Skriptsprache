@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block content %}
+    <a href = "{% url 'addlehveranstaltung' %}" class = "btn btn-primary"> fuegen sie Lehveranstalltung Hinzu </a>
+    <br/>
+
+    <br/>
+    <table class="table table-striped table-bordered table-hover"  >
+        <tr>
+            <th>Kurzname</th>
+            <th>Title</th>
+            <th>Studierende</th>
+            <th>Ändern</th>
+            <th>Loeschern</th>
+        </tr>
+        {% for Lehver in lehveranstaltungs %}
+            <tr>
+                <td>
+                    {{ Lehver.Kurzname }}
+                </td>
+
+                <td>
+                    {{ Lehver.Title }}
+                </td>
+
+                <td>
+                    {% for studierende in Lehver.studierenden.all %}
+                         {{ studierende  }}<br/>
+                    {% endfor %}
+                </td>
+            <td><a href="{% url 'editlehveranstaltung' pk=Lehver.id %}">{% bootstrap_icon 'edit' %}</a></td>
+            <td><a href="{% url 'deletelehveranstaltung' pk=Lehver.id %}">{% bootstrap_icon 'trash' %}</a></td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

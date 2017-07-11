@@ -1,0 +1,74 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Shop was</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+{#    style base#}
+    <script src="{% static "static/css/main.css" %}"></script>
+  <style>
+    /* Remove the navbar's default rounded borders and increase the bottom margin */
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+
+    /* Remove the jumbotron's default bottom margin */
+     .jumbotron {
+      margin-bottom: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
+</head>
+
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1>SHOP WAS!</h1>
+            <p>Kaufen Sie wo Sie wollen & wenn Sie wollen </p>
+        </div>
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://js.stripe.com/v2/"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src='{% static "javaScript/bootstrap.min.js" %}'></script>
+    <script src='{% static "javaScript/docs.min.js" %}'></script>
+    <script src='{% static "javaScript/jquery.min.js.min.js" %}'></script>
+
+    {% block script %}
+
+    {% endblock %}
+
+    <script>
+        $(document).ready(function () {
+            {% block jquery %}
+            {% endblock %}
+        })
+    </script>
+   {% block footer %}
+
+    {% endblock %}
+    </body>
+</html>
+
+
